@@ -1,7 +1,7 @@
 /* tvSort - A Java utility for sorting downloaded TV Shows
  * Only working if file has the standard format
  * e.g. Family.Guy.S01E11.XX.XX.XX.xxx
- * Created by Joshua Truscott (tru_sk0tt)
+ * Created by Joshua Truscott (GitHub: truskot)
  * Free to modify, recreate and/or redistribute
  * 18/04/2014 - First project using GitHub
  */
@@ -41,7 +41,6 @@ public class Main {
 			if (listOfFiles[i].isFile()) { //If item is a file
 				String label = listOfFiles[i].getName(); //Name of file
 				label = label.replaceAll("\\s+","").replace(".","").toLowerCase(); //Gets rid of special characters(!, %, & etc.) and also removes all ".", and makes lower case
-
 				for(int k = 8;k<lines.length;k++){ //Starts from line 8(beginning of Show list)
 					showString = lines[k].replaceAll("[^\\w\\s]","").replaceAll(" ","").toLowerCase(); //Gets rid of special characters(!, %, & etc.) and also removes all ".", and makes lower case
 					if(label.length()>showString.length())
