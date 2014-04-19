@@ -1,7 +1,7 @@
 /* tvSort - A Java utility for sorting downloaded TV Shows
  * Only working if file has the standard format
  * e.g. Family.Guy.S01E11.XX.XX.XX.xxx
- * Created by Joshua Truscott (Tru_sk0tt)
+ * Created by Joshua Truscott (tru_sk0tt)
  * Free to modify, recreate and/or redistribute
  * 18/04/2014 - First project using GitHub
  */
