@@ -1,0 +1,11 @@
+Configuration file
+Download location*: "C:\Users\Joshua\Documents"
+TV Shows location**: "C:\Users\Joshua\Documents"
+
+* Replace this with the directory your torrent client downloads to
+** Replace this with the directory you keep your TV Shows in
+
+Sort List (List of TV Shows you want sorted, one show per line. I've added 3 as an example)
+Family Guy
+American Dad!
+How I Met Your Mother

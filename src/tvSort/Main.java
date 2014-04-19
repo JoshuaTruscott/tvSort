@@ -21,8 +21,10 @@ public class Main {
 		System.out.println("tvSort - Created by tru_sk0tt");
 		String[] lines = readFile("config.txt").split("\n"); //Reads configuration
 		lines[1] = lines[1].replace("\\","/"); //Makes file name readable for Java
-		File downloadLocation = new File(lines[1].substring(20, lines[1].length()-1)); //Gets download location from config file (file origin)
+		File downloadLocation = new File(lines[1].substring(21, lines[1].length()-1)); //Gets download location from config file (file origin)
 		File destLocation = new File(lines[2].substring(22, lines[2].length()-1)) ; //Gets user's TV Shows folder (file destination)
+		int sortCount = 0;
+		System.out.println("Download Location: " + downloadLocation + "\nDestination Location: "+ destLocation + "\n");
 		if(!downloadLocation.exists() || !destLocation.exists()){
 			System.out.println("Incorrect file paths given by config.txt\nMake sure the locations entered exist\nand are accessible by this process.\nTerminating...");
 			return;
@@ -42,21 +44,23 @@ public class Main {
 
 				for(int k = 8;k<lines.length;k++){ //Starts from line 8(beginning of Show list)
 					showString = lines[k].replaceAll("[^\\w\\s]","").replaceAll(" ","").toLowerCase(); //Gets rid of special characters(!, %, & etc.) and also removes all ".", and makes lower case
+					if(label.length()>showString.length())
+						if(showString.equals(label.substring(0, showString.length()))){ //If showString from config file matches with string 'label' derived from file name
+							int season = Integer.parseInt(label.substring(showString.length()+1,showString.length()+3)); //Converts season number (was String) to integer
+							System.out.println("Found episode of: " + lines[k] + ", Season: " + season); //Notifies via console that match has been found
+							File newDir = new File(destLocation.getAbsolutePath().replace("\\","/")+"/" + lines[k] + "/" +"Season "+ season + "/" + listOfFiles[i].getName()); 
+							//New Directory format: X:\[Users TV Shows folder]\[TV Show Name]\[Season #]
+							sortCount += 1;
 
-					if(showString.equals(label.substring(0, showString.length()))){ //If showString from config file matches with string 'label' derived from file name
-						int season = Integer.parseInt(label.substring(showString.length()+1,showString.length()+3)); //Converts season number (was String) to integer
-						System.out.println("Found episode of: " + lines[k] + ", Season: " + season); //Notifies via console that match has been found
-						File newDir = new File(destLocation.getAbsolutePath().replace("\\","/")+"/" + lines[k] + "/" +"Season "+ season + "/" + listOfFiles[i].getName()); 
-						//New Directory format: X:\[Users TV Shows folder]\[TV Show Name]\[Season #]
+							if(!newDir.exists()) //If directory the file is being sent to doesn't exist:
+								newDir.mkdirs(); //Create it
 
-						if(!newDir.exists()) //If directory the file is being sent to doesn't exist:
-							newDir.mkdirs(); //Create it
-
-						Files.move(listOfFiles[i].toPath(), newDir.toPath(), StandardCopyOption.REPLACE_EXISTING); //Movement operation
-					}
+							Files.move(listOfFiles[i].toPath(), newDir.toPath(), StandardCopyOption.REPLACE_EXISTING); //Movement operation
+						}
 				}
 			}
 		}
+		System.out.println(sortCount + " shows have been sorted\nTerminating...");
 	}
 	//
 	public static String readFile(String fileName) throws IOException { //Method used to read text file
