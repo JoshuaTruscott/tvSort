@@ -18,7 +18,7 @@ import java.nio.file.StandardCopyOption;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		System.out.println("tvSort - Created by tru_sk0tt");
+		System.out.println("tvSort - Created by truskot");
 		String[] lines = readFile("config.txt").split("\n"); //Reads configuration
 		lines[1] = lines[1].replace("\\","/"); //Makes file name readable for Java
 		File downloadLocation = new File(lines[1].substring(21, lines[1].length()-1)); //Gets download location from config file (file origin)
